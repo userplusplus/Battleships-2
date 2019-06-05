@@ -53,6 +53,15 @@ class Gameboard:
         #Return all positions
         return my_list
 
+    #update positon's is_occupied value to specified bool
+    def update_position(self, check_position):
+        p = check_position
+        n = 0 #counter
+        for x in self.all_positions:
+            
+            #Compares x and y values of check-pos against current co-ord in list
+            if p.y == self.all_positions[n].y and p.x == self.all_positions[n].x:
+
     #Checks to see if the position is taken in the gameboard
     #Returns false if taken, true if not taken.
     #Also returns false if co-ords are non-existant on the gameboard.
