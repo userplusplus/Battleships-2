@@ -3,6 +3,7 @@
 #Date: 6/06/2019
 #About: Contains the ship constructor that all ships are based off of.
 
+from Position import Position
 
 class Ship:
 
@@ -25,7 +26,7 @@ class Ship:
 
         #All 'positions' of the ship, 3 total
         if all_positions == None:
-            self.__all_positions = self.place_ship()
+            self.__all_positions = []
         else:
             self.__all_positions = all_positions
         
@@ -51,21 +52,46 @@ class Ship:
         return self.__length
     
     @property #Getter for all_positions
-    def length(self):
+    def all_positions(self):
         return self.__all_positions
+    
+    @all_positions.setter #Setter for all_positions
+    def all_positions(self, value):
+        self.__all_positions = value
 
-    #Set all positions of the ship, save them as __all_positions
+    #Set all positions of the ship, checking them one
+    # at a time then save them as __all_positions.
+    #If any check fail, delete obj instance and print accordingly
     def place_ship(self, gameboard):
         p = self.position
         g = gameboard
-        n = 0 #counter
+        err = "One of the co-ordinates either overlaps with an existing ship or is not on the map. \nPlease try again"
+        all_pos = []
         #check orientation
         if self.orientation == "h":
             #horizontal
-            for x in range(self.length):
-                
-                g.is_valid_position(p)
+            for i in range(int(self.length)):
+                #If the position exists on the gameboard and not taken (is_occupied)
+                if g.is_valid_position(p): 
+                    #append to ship co-ords
+                    all_pos.append(p)
+                    print(p.x)
+                    print(p.y)
+                    #Set position on gameboard to occupied
+                    g.update_position(p, True)
+                    print("Placement successful. (" + str(all_pos[i].x) + "," + str(all_pos[i].y) + ")")
+                    #update checked position by 1
+                    p.x = int(p.x) + 1
+                else:
+                    #Co-ord entered is invalid
+                    print(err)
+        self.all_positions = all_pos
 
-        if self.orientation == "v":
-            #vertical
-            for x in self.length
+    #output all_positions
+    def show_positions(self):
+        string = "Positions of this ship: "
+        n = 0 #counter
+        for x in self.all_positions:
+            #append co-ord as string to string to print for each co-ord existing
+            string += "(" + str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ") "
+        print(string)
