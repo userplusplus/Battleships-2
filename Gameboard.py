@@ -3,8 +3,6 @@
 #Date 6/06/2019
 #About: A class which creates a grid based game
 #       board in which ships can be placed onto.
-    
-from Position import Position
 
 #Acts as a container for the game data which can be updated with new data.
 class Gameboard:
@@ -57,18 +55,22 @@ class Gameboard:
     def update_position(self, check_position, input_bool):
         p = check_position
         n = 0 #counter
-        
-        for x in self.all_positions:
-            #Compares x and y values of check-pos against current co-ord in list
-            if p.y == self.all_positions[n].y and p.x == self.all_positions[n].x:
-                #Change match to new boolean
-                self.all_positions[n].is_occupied = input_bool
-                break
-            n +=1
+
+        #check for correct input of bool, continue if fine
+        if type(input_bool) == bool:
+            for x in self.all_positions:
+                #Compares x and y values of check-pos against current co-ord in list
+                if p.y == self.all_positions[n].y and p.x == self.all_positions[n].x:
+                    #Change match to new boolean
+                    self.all_positions[n].is_occupied = input_bool
+                    break
+                n +=1
+            else:
+                #Iterated through whole list and found no matches
+                print("Your input did not match to any positions on the gameboard") #error
         else:
-            #Iterated through whole list and found no matches
-            print("Your input did not match to any positions on the gameboard") #error
-                
+            #bool not bool input
+            print("The boolean argument was not a boolean value type.") #error
 
     #Checks to see if the position is taken in the gameboard
     #Returns false if taken, true if not taken.
