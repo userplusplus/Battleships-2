@@ -15,9 +15,6 @@ class Ship:
         self.__x = x
         self.__y = y
 
-        #The initial co-ords of the ship.
-        self.__position = Position(self.x, self.y)
-
         #The length of the ship in units.
         if length == None:
             self.__length = 3 #default value
@@ -43,10 +40,6 @@ class Ship:
     def y(self):
         return self.__y
 
-    @property #Getter for position
-    def position(self):
-        return self.__position
-
     @property #Getter for length
     def length(self):
         return self.__length
@@ -63,16 +56,20 @@ class Ship:
     # at a time then save them as __all_positions.
     #If any check fail, delete obj instance and print accordingly
     def place_ship(self, gameboard):
-        p = self.position
         g = gameboard
         err = "One of the co-ordinates either overlaps with an existing ship or is not on the map. \nPlease try again"
+        curr_x = self.x
+        curr_y = self.y
         all_pos = []
         #check orientation
         if self.orientation == "h":
             #horizontal
             for i in range(int(self.length)):
+                #Crete new object for array entry so they are all unique
+                p = Position(curr_x, curr_y)
+
                 #If the position exists on the gameboard and not taken (is_occupied)
-                if g.is_valid_position(p): 
+                if g.is_valid_position(p):
                     #append to ship co-ords
                     all_pos.append(p)
                     print(p.x)
@@ -80,8 +77,8 @@ class Ship:
                     #Set position on gameboard to occupied
                     g.update_position(p, True)
                     print("Placement successful. (" + str(all_pos[i].x) + "," + str(all_pos[i].y) + ")")
-                    #update checked position by 1
-                    p.x = int(p.x) + 1
+                    #update checked x axis position by 1
+                    curr_x += 1
                 else:
                     #Co-ord entered is invalid
                     print(err)
