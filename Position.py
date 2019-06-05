@@ -11,8 +11,10 @@ class Position:
     def __init__(self, x, y, is_occupied=None):
         self.__x = x
         self.__y = y
+
+        #Allows is_occupied to have no initial value
         if is_occupied = None:
-            self.__is_occupied = False
+            self.__is_occupied = False #default value, if none given
         else:
             self.__is_occupied = is_occupied
 
@@ -25,7 +27,7 @@ class Position:
         if type(value) = int: #int checker
             self.__x = value
         else:
-            return print("A wrong x value was entered into a position")
+            return print("A wrong x value was entered into a position") #error
  
     @property #Getter for y
     def y(self):
@@ -36,7 +38,7 @@ class Position:
         if type(value) = int: #int checker
             self.__y = value
         else:
-            return print("A wrong x value was entered into a position")
+            return print("A wrong x value was entered into a position") #error
 
     @property #Getter for is_occupied
     def is_occupied(self):
@@ -47,4 +49,4 @@ class Position:
         if type(value) = bool:  #boolean checker
             self.__is_occupied = value
         else:
-            return print("A wrong is_occupied value was entered into a position")
+            return print("A wrong is_occupied value was entered into a position") #error
