@@ -1,7 +1,7 @@
 #Position
 #Author : Dominic Martindale
 #Date: 6/06/2019
-#About: A constructor for creating an object with x and y co-ords
+#About: A constructor for creating an container object with x and y co-ords
 
 class Position:
 
@@ -13,7 +13,7 @@ class Position:
         self.__y = y
 
         #Allows is_occupied to have no initial value
-        if is_occupied = None:
+        if is_occupied == None:
             self.__is_occupied = False #default value, if none given
         else:
             self.__is_occupied = is_occupied
@@ -24,7 +24,7 @@ class Position:
  
     @x.setter #Setter for x, int only
     def x(self, value):
-        if type(value) = int: #int checker
+        if type(value) == int: #int checker
             self.__x = value
         else:
             return print("A wrong x value was entered into a position") #error
@@ -35,7 +35,7 @@ class Position:
  
     @y.setter  #Setter for y int only
     def y(self, value):
-        if type(value) = int: #int checker
+        if type(value) == int: #int checker
             self.__y = value
         else:
             return print("A wrong x value was entered into a position") #error
@@ -46,7 +46,7 @@ class Position:
  
     @y.setter  #Setter for is_occupied, bloolean only
     def is_occupied(self, value):
-        if type(value) = bool:  #boolean checker
+        if type(value) == bool:  #boolean checker
             self.__is_occupied = value
         else:
             return print("A wrong is_occupied value was entered into a position") #error
