@@ -12,6 +12,8 @@ g = Gameboard(5,5)
 print(str(g.x))
 print(str(g.y))
 
-g.is_valid_position(p1)
+#g.is_valid_position(p1)
+
+g.update_position(p1, True)
 
 

@@ -20,7 +20,7 @@ class Gameboard:
             self.__all_positions = self.create_positions()
         else:
             self,__all_positions = all_positions
- 
+
     @property # getter
     def x(self):
         return self.__x
@@ -54,13 +54,21 @@ class Gameboard:
         return my_list
 
     #update positon's is_occupied value to specified bool
-    def update_position(self, check_position):
+    def update_position(self, check_position, input_bool):
         p = check_position
         n = 0 #counter
+        
         for x in self.all_positions:
-            
             #Compares x and y values of check-pos against current co-ord in list
             if p.y == self.all_positions[n].y and p.x == self.all_positions[n].x:
+                #Change match to new boolean
+                self.all_positions[n].is_occupied = input_bool
+                break
+            n +=1
+        else:
+            #Iterated through whole list and found no matches
+            print("Your input did not match to any positions on the gameboard") #error
+                
 
     #Checks to see if the position is taken in the gameboard
     #Returns false if taken, true if not taken.
@@ -68,9 +76,11 @@ class Gameboard:
     def is_valid_position(self, check_position):
         p = check_position
         n = 0 #counter
+        
         for x in self.all_positions:
             #Un-comment to show test log loop
-            #print("Currently testing: ("+ str(p.x) + "," + str(p.y) + ") against ("+ str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ")")
+            #print("Currently testing: ("+ str(p.x) + "," + str(p.y) + ") against ("+
+            #str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ")")
             
             #Compares x and y values of check-pos against current co-ord in list
             if p.y == self.all_positions[n].y and p.x == self.all_positions[n].x:
@@ -84,5 +94,5 @@ class Gameboard:
             
         else:
             #Iterated through whole list and found no matches
-            print("Your input did not match to any entrys on the gameboard") #error
+            print("Your input did not match to any positions on the gameboard") #error
             return False
