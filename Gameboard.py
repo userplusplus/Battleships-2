@@ -1,8 +1,8 @@
 #Gameboard
 #Author: Dominic Martindale
 #Date 6/06/2019
-#About: A class which creates a grid based game
-#       board in which ships can be placed onto.
+#About: A class which creates a grid based 'game
+#       board' in which ships can be placed onto.
 
 from Position import Position
 

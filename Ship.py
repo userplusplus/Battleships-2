@@ -91,4 +91,5 @@ class Ship:
         for x in self.all_positions:
             #append co-ord as string to string to print for each co-ord existing
             string += "(" + str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ") "
+            n += 1
         print(string)
