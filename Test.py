@@ -1,6 +1,7 @@
 from Position import Position
 from Gameboard import Gameboard
 from Ship import Ship
+from Command import Command
 
 #p = Position(1,1)
 #p1 = Position(5,5)
@@ -19,9 +20,11 @@ ship = Ship("h",1,1)
 
 ship.place_ship(g)
 ship.show_positions()
-print(ship.all_positions[0].x)
-print(ship.all_positions[0].y)
-print(ship.all_positions[1].x)
-print(ship.all_positions[1].y)
-print(ship.all_positions[2].x)
-print(ship.all_positions[2].y)
+
+c = Command()
+c.get_user_command()
+print("The is successful flag is ", c.is_successful)
+if c.is_successful:
+    print("The command stored is ", c.command_type)
+else:
+    print("The error message is ", c.error_message)
