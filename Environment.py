@@ -12,7 +12,8 @@ class Environment:
     def __init__(self):
         self.__game_board = Gameboard(5,5)
         self.__command = Command()
-        self.__ship_list = []
+        self.__ship_list = [] #list of ship objects
+        self.__ship_total = 0 #counter for number of ships
 
     @property #Getter for gameboard, setter in constructor
     def game_board(self):
@@ -26,6 +27,10 @@ class Environment:
     def ship_list(self):
         return self.__ship_list
 
+    @ship_list.setter #Setter for ship_list
+    def ship_list(self, value):
+        self.__ship_list = value
+
     # output the all ship co-ords
     #def get_report(self):
         #for how many ships there are, output co-ords
@@ -37,36 +42,35 @@ class Environment:
         # get the user command
         self.command.get_user_command()
  
-        # now check the is_successful property
+        # check the is_successful property
         if self.command.is_successful:
-            # use if elif to execute the appropriate methods
+
+            #Place command
             if self.command.command_type == "place":
-                if self.toy_board.is_valid_position(self.toy_robot.get_up()):
-                    self.toy_robot.robot_position = self.toy_robot.get_up()
+                #If position chosen is valid
+                if self.game_board.is_valid_position:
+                    #Parse user string data from user_input
+                    # expected input example: "v,1,1"
+                    p = self.command.command_data.split(",")
+                    #check for valid input, 3 parts, part 2 and 3 have a number aka co-ord
+                    if len(p) < 3 and any(char.isdigit() for char in p[2])\
+                       and any(char.isdigit() for char in p[3]):
+                        #Create a ship in ship list
+                        self.ship_list[self.ship_total] = Ship(p[0],p[1],p[2])
+                    #use place command on ship
+                    self.ship_list[self.ship_total].place_ship
                 else:
                     print("Sorry, either that co-ord doesn't exist or is taken")
-            elif self.command.command_type == "down":
+
+            #Show command
+            elif self.command.command_type == "show":
                 if self.toy_board.is_valid_position(self.toy_robot.get_down()):
                     self.toy_robot.robot_position = self.toy_robot.get_down()
-                else:
-                    print("Ooops, not moved - get a bump instead!")
-                    self.toy_robot.bumps += 1
-            elif self.command.command_type == "left":
-                if self.toy_board.is_valid_position(self.toy_robot.get_left()):
-                    self.toy_robot.robot_position = self.toy_robot.get_left()
-                else:
-                    print("Ooops, not moved - get a bump instead!")
-                    self.toy_robot.bumps += 1
-            elif self.command.command_type == "right":
-                if self.toy_board.is_valid_position(self.toy_robot.get_right()):
-                    self.toy_robot.robot_position = self.toy_robot.get_right()
-                else:
-                    print("Ooops, not moved - get a bump instead!")
-                    self.toy_robot.bumps += 1
             else:
-                # the command must be exit or report
+                # the command must be exit
                 if self.command.command_type == "report":
                     self.get_report()
                 # don't need else here, 'exit' is implemented in main class
+                # so that it breaks out of permanent loop
         else:
             print(self.command.error_message)
