@@ -2,7 +2,7 @@
 # Author: Dominic Martindale
 # Note: Mostly pulled from iQualify
 # Date: 6/06/2019
-# About: parses player input into commands
+# About: parses player input into and checks against existing commands
 
 class Command:
     def __init__(self):
