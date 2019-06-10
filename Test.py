@@ -20,16 +20,3 @@ ship = Ship("h",1,1)
 
 ship.place_ship(g)
 ship.show_positions()
-
-ship1 = Ship("h",1,2)
-test = "ship" + str(1)
-test.place_ship(g)
-test.show_positions()
-
-c = Command()
-c.get_user_command()
-print("The is successful flag is ", c.is_successful)
-if c.is_successful:
-    print("The command stored is ", c.command_type)
-else:
-    print("The error message is ", c.error_message)

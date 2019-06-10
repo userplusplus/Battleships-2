@@ -13,7 +13,6 @@ class Environment:
         self.__game_board = Gameboard(5,5)
         self.__command = Command()
         self.__ship_list = [] #list of ship objects
-        self.__ship_total = 0 #counter for number of ships
 
     @property #Getter for gameboard, setter in constructor
     def game_board(self):
@@ -47,18 +46,21 @@ class Environment:
 
             #Place command
             if self.command.command_type == "place":
-                #If position chosen is valid
                 if self.game_board.is_valid_position:
+                    #number of ships currently placed
+                    n = len(self.ship_list)
                     #Parse user string data from user_input
                     # expected input example: "v,1,1"
                     p = self.command.command_data.split(",")
                     #check for valid input, 3 parts, part 2 and 3 have a number aka co-ord
-                    if len(p) < 3 and any(char.isdigit() for char in p[2])\
-                       and any(char.isdigit() for char in p[3]):
-                        #Create a ship in ship list
-                        self.ship_list[self.ship_total] = Ship(p[0],p[1],p[2])
+                    if len(p) < 3\
+                        and p[0] == "v" or "h"\
+                        and any(char.isdigit() for char in p[1])\
+                        and any(char.isdigit() for char in p[2]):
+                        #Add a ship to the list
+                        self.ship_list.append(Ship(p[0],p[1],p[2]))
                     #use place command on ship
-                    self.ship_list[self.ship_total].place_ship
+                    self.ship_list[n].place_ship(self.game_board)
                 else:
                     print("Sorry, either that co-ord doesn't exist or is taken")
 

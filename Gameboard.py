@@ -83,13 +83,12 @@ class Gameboard:
         
         for x in self.all_positions:
             #Un-comment to show test log loop
-            print("Currently testing: ("+ str(p.x) + "," + str(p.y) + ") against ("+
-            str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ")")
+            #print("Currently testing: ("+ str(p.x) + "," + str(p.y) + ") against ("+
+            #str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ")")
             
             #Compares x and y values of check-pos against current co-ord in list
             if p.y == self.all_positions[n].y and p.x == self.all_positions[n].x:
                 if self.all_positions[n].is_occupied == True:
-                    print()
                     return False
                 else:
                     #Co-ords are a match to existing one on gameboard

@@ -12,8 +12,8 @@ class Ship:
         self.__orientation = orientation
 
         #The x and y co-ords that the initial placement of the ship is based off of
-        self.__x = x
-        self.__y = y
+        self.__x = int(x)
+        self.__y = int(y)
 
         #The length of the ship in units.
         if length == None:
@@ -72,11 +72,9 @@ class Ship:
                 if g.is_valid_position(p):
                     #append to ship co-ords
                     all_pos.append(p)
-                    print(p.x)
-                    print(p.y)
                     #Set position on gameboard to occupied
                     g.update_position(p, True)
-                    print("Placement successful. (" + str(all_pos[i].x) + "," + str(all_pos[i].y) + ")")
+                    #print("Placement successful. (" + str(all_pos[i].x) + "," + str(all_pos[i].y) + ")")
                     #update checked x axis position by 1
                     curr_x += 1
                 else:
@@ -86,10 +84,10 @@ class Ship:
 
     #output all_positions
     def show_positions(self):
-        string = "Positions of this ship: "
+        string = "Ship at: "
         n = 0 #counter
         for x in self.all_positions:
             #append co-ord as string to string to print for each co-ord existing
             string += "(" + str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ") "
             n += 1
-        print(string)
+        #print(string)
