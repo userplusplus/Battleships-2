@@ -70,7 +70,7 @@ class Environment:
                     self.toy_robot.robot_position = self.toy_robot.get_down()
             else:
                 # the command must be exit
-                if self.command.command_type == "report":
+                if self.command.command_type == "exit":
                     self.get_report()
                 # don't need else here, 'exit' is implemented in main class
                 # so that it breaks out of permanent loop
