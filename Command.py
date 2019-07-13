@@ -1,4 +1,4 @@
-#Commands
+#Command
 # Author: Dominic Martindale
 # Note: Mostly pulled from iQualify
 # Date: 6/06/2019
@@ -46,7 +46,6 @@ class Command:
         self.is_successful = False
 
         user_input = input("\nEnter your command: ").split(" ")
-        print(user_input)
         
         # if the command is not valid
         if user_input[0] != "show"\
@@ -56,7 +55,11 @@ class Command:
             pass
         # else set is_successful to true and set the command_type
         else:
-            self.is_successful = True
-            self.command_type = user_input[0]
-            if user_input[1] != None:
-                self.command_data = user_input[1]
+            try:
+                #Pass if there aren't two parts to the input
+                if user_input[1] != None:
+                    self.is_successful = True
+                    self.command_type = user_input[0]
+                    self.command_data = user_input[1]
+            except:
+                print(self.error_message)

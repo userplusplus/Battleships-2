@@ -44,7 +44,7 @@ class Position:
     def is_occupied(self):
         return self.__is_occupied
  
-    @is_occupied.setter  #Setter for is_occupied, bloolean only
+    @is_occupied.setter  #Setter for is_occupied, boolean only
     def is_occupied(self, value):
         if type(value) == bool:  #boolean checker
             self.__is_occupied = value

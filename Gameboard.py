@@ -19,7 +19,7 @@ class Gameboard:
         if all_positions == None:
             self.__all_positions = self.create_positions()
         else:
-            self,__all_positions = all_positions
+            self.__all_positions = all_positions
 
     @property # getter
     def x(self):
@@ -69,23 +69,19 @@ class Gameboard:
                 n +=1
             else:
                 #Iterated through whole list and found no matches
-                print("Your input did not match to any positions on the gameboard") #error
+                return False
         else:
             #bool not bool input
-            print("The boolean argument was not a boolean value type.") #error
+            return False
 
     #Checks to see if the position is taken in the gameboard
-    #Returns 0 if taken, 1 if not taken.
-    #Also returns 0 if co-ords are non-existant on the gameboard.
+    #Returns false if taken, true if not taken.
+    #Also returns false if co-ords are non-existant on the gameboard.
     def is_valid_position(self, check_position):
         p = check_position
         n = 0 #counter
         
-        for x in self.all_positions:
-            #Un-comment to show test log loop
-            #print("Currently testing: ("+ str(p.x) + "," + str(p.y) + ") against ("+
-            #str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ")")
-            
+        for i in self.all_positions:            
             #Compares x and y values of check-pos against current co-ord in list
             if p.y == self.all_positions[n].y and p.x == self.all_positions[n].x:
                 if self.all_positions[n].is_occupied == True:
@@ -98,5 +94,4 @@ class Gameboard:
             
         else:
             #Iterated through whole list and found no matches
-            print("Your input did not match to any positions on the gameboard") #error
             return False

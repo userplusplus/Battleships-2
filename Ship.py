@@ -57,30 +57,38 @@ class Ship:
     #If any check fail, delete obj instance and print accordingly
     def place_ship(self, gameboard):
         g = gameboard
-        err = "One of the co-ordinates either overlaps with an existing ship or is not on the map. \nPlease try again"
         curr_x = self.x
         curr_y = self.y
         all_pos = []
-        #check orientation
-        if self.orientation == "h":
-            #horizontal
-            for i in range(int(self.length)):
-                #Crete new object for array entry so they are all unique
-                p = Position(curr_x, curr_y)
 
-                #If the position exists on the gameboard and not taken (is_occupied)
-                if g.is_valid_position(p):
-                    #append to ship co-ords
-                    all_pos.append(p)
-                    #Set position on gameboard to occupied
-                    g.update_position(p, True)
-                    #print("Placement successful. (" + str(all_pos[i].x) + "," + str(all_pos[i].y) + ")")
-                    #update checked x axis position by 1
+        for i in range(int(self.length)):
+            #Create new object for array entry so they are all unique
+            p = Position(curr_x, curr_y)
+            
+            #If the position exists on the gameboard and not taken (is_occupied)
+            if g.is_valid_position(p):
+                #append to co-ords to temporary
+                all_pos.append(p)
+                #update checked axis position by 1 depending on orientation
+                if self.orientation == "h":
+                    #horizontal
                     curr_x += 1
                 else:
-                    #Co-ord entered is invalid
-                    print(err)
+                    #vertical
+                    curr_y += 1
+            else:
+                #A co-ord that was checked is invalid
+                return False
+        
+        #Set position on gameboard to occupied for each position
+        n = 0
+        for x in all_pos:
+            g.update_position(all_pos[n], True)
+            n += 1
+
+        #assign all positions to the ship
         self.all_positions = all_pos
+        return True
 
     #output all_positions
     def show_positions(self):
@@ -90,4 +98,4 @@ class Ship:
             #append co-ord as string to string to print for each co-ord existing
             string += "(" + str(self.all_positions[n].x) + "," + str(self.all_positions[n].y) + ") "
             n += 1
-        #print(string)
+        return string
